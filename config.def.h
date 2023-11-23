@@ -22,8 +22,8 @@ static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_gray4[]       = "#0d0d17";
+static const char col_cyan[]        = "#6ca232";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -94,6 +94,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("chromium --incognito") },
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("firefox --private-window") },
 	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("discord-ptb") },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("feh --bg-fill --randomize /home/saumitra/Pictures/Wallpapers/") },
 	{ 0,                            XK_Print,  spawn,          SHCMD("flameshot full") },
@@ -145,8 +146,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
 
 
     /*                              Multi Monitor                               */

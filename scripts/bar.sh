@@ -1,38 +1,39 @@
 #!/bin/bash
 
 brightness() {
-    printf " "
-    printf "%.0f | " $(cat /sys/class/backlight/*/brightness)
+    printf "BRI: "
+    printf "%.0f |" $(cat /sys/class/backlight/*/brightness)
 }
 
 volume(){
     vol=$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')
     isMuted=$(pactl list sinks | grep -A 10 'State: RUNNING' | grep 'Mute:' | awk '{print $2}')
+	printf "VOL: "
     if [[ $isMuted == "yes" ]]; then
-        echo "Muted shh!! | "
+        echo "Muted shh!! |"
     else
-        echo "$vol | "
+        echo "$vol |"
     fi
 }
 
 cpu() {
     cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
-    printf " $cpu_val%% | "
+    printf "CPU: $cpu_val%% |"
 }
 
 mem() {
-    printf " "
-    printf "$(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g) | "
+    printf "MEM: "
+    printf "$(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g) |"
 }
 
 clock() {
-    printf "󱑆 "
-    printf "$(date '+%H:%M') | "
+    printf "TIME: "
+    printf "$(date '+%H:%M') |"
 }
 
 battery() {
     get_capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
-    printf " $get_capacity%% "
+    printf "BAT: $get_capacity%% "
 }
 
 while true; do
