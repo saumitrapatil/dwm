@@ -5,8 +5,18 @@ brightness() {
     printf "%.0f |" $(cat /sys/class/backlight/*/brightness)
 }
 
+sink(){
+	current_sink=$(pactl info | grep 'Default Sink' | awk '{print $3}')
+	printf "Sink: "
+	if [[ "$current_sink" == *"hdmi"* ]]; then
+		echo "HDMI |"
+	else
+		echo "Analog |"
+	fi
+}
+
 volume(){
-    vol=$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')
+    vol=$(pamixer --get-volume)
     isMuted=$(pactl list sinks | grep -A 10 'State: RUNNING' | grep 'Mute:' | awk '{print $2}')
 	printf "VOL: "
     if [[ $isMuted == "yes" ]]; then
@@ -17,8 +27,8 @@ volume(){
 }
 
 cpu() {
-    cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
-    printf "CPU: $cpu_val%% |"
+    cpu_use=$(top -b -n 1 | grep 'Cpu(s)' | awk '{print 100 - $8}')
+    printf "CPU: $cpu_use%% |"
 }
 
 mem() {
@@ -28,7 +38,7 @@ mem() {
 
 clock() {
     printf "TIME: "
-    printf "$(date '+%H:%M') |"
+    printf "$(date '+%d %b, %A, %R') |"
 }
 
 battery() {
@@ -37,5 +47,5 @@ battery() {
 }
 
 while true; do
-    xsetroot -name "$(volume) $(brightness) $(cpu) $(mem) $(clock) $(battery)"
+	xsetroot -name "$(sink) $(volume) $(brightness) $(cpu) $(mem) $(clock) $(battery)"
 done
