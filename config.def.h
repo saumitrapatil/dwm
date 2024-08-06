@@ -113,8 +113,8 @@ static const Key keys[] = {
     
 
     /*                                  Brightness and Volume                           */
-	{ MODKEY,                       XK_F11,     spawn,          SHCMD("brightnessctl s 5-") },
-	{ MODKEY,                       XK_F12,     spawn,          SHCMD("brightnessctl s +5") },
+	{ MODKEY,                       XK_F7,      spawn,          SHCMD("brightnessctl s 5-") },
+	{ MODKEY,                       XK_F8,      spawn,          SHCMD("brightnessctl s +5") },
 	{ MODKEY,                       XK_F1,      spawn,          SHCMD("pamixer -t") },
 	{ MODKEY,                       XK_F2,      spawn,          SHCMD("pamixer -d 5") },
 	{ MODKEY,                       XK_F3,      spawn,          SHCMD("pamixer -i 5") },
@@ -140,7 +140,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} }, // monocle
 	{ MODKEY|ControlMask,           XK_d,      setlayout,      {.v = &layouts[2]} }, // dwindle
 	{ MODKEY,                       XK_b,      setlayout,      {.v = &layouts[3]} }, // bstack 
-	{ MODKEY|ControlMask,             XK_h,      setlayout,      {.v = &layouts[4]} }, // horizgrid
+	{ MODKEY|ControlMask,           XK_h,      setlayout,      {.v = &layouts[4]} }, // horizgrid
 	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} }, // gaplessgrid
 	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[6]} }, // centeredmaster
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[7]} }, // floating
