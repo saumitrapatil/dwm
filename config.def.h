@@ -107,6 +107,9 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioPlay,  spawn,          SHCMD("playerctl --player spotify play-pause") },
 	{ 0,                            XF86XK_AudioNext,  spawn,          SHCMD("playerctl --player spotify next") },
 	{ 0,                            XF86XK_AudioPrev,  spawn,          SHCMD("playerctl --player spotify previous") },
+	{ MODKEY,                       XK_KP_Right,	   spawn,          SHCMD("playerctl --player spotify next") },
+	{ MODKEY,                       XK_KP_Left,		   spawn,          SHCMD("playerctl --player spotify prev") },
+	{ 0,                            XF86XK_TouchpadToggle,  spawn,          SHCMD("playerctl --player spotify previous") },
 	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,   SHCMD("playerctl --player spotify volume 0.01+") },
 	{ 0,                            XF86XK_AudioLowerVolume,  spawn,   SHCMD("playerctl --player spotify volume 0.01-") },
 
