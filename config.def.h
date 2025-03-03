@@ -1,5 +1,4 @@
 /* See LICENSE file for copyright and license details. */
-
 #include <X11/XF86keysym.h>
 
 /* appearance */
@@ -24,10 +23,11 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_bg[]			= "#005072";
+static const char col_bor[]			= "#caace6";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_bg,    col_bg},
+	[SchemeSel]  = { col_gray4, col_bg,    col_bor},
 };
 
 /* tagging */
@@ -48,7 +48,7 @@ static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
-static int attachbelow = 1;    /* 1 means attach after the currently active window */
+static int attachbelow = 0;    /* 1 means attach after the currently active window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -91,12 +91,13 @@ static const char *termcmd[]  = { "wezterm", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
     /*                                 Applications                             */
-	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
+	{ MODKEY,                       XK_BackSpace,  spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("chromium --incognito") },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("zen-browser --private-window") },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("firefox --private-window") },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("discord") },
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("feh --bg-fill --randomize /home/saumitra/Pictures/Wallpapers/") },
+	{ MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("discord") },
+	{ MODKEY|ShiftMask|ControlMask, XK_p,      spawn,          SHCMD("feh --bg-fill --randomize /home/saumitra/Pictures/Wallpapers/") },
 	{ 0,                            XK_Print,  spawn,          SHCMD("flameshot full") },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("flameshot gui") },
 	{ MODKEY,                       XK_e,      spawn,          SHCMD("thunar") },
@@ -109,7 +110,7 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioPrev,  spawn,          SHCMD("playerctl --player spotify previous") },
 	{ MODKEY,                       XK_KP_Right,	   spawn,          SHCMD("playerctl --player spotify next") },
 	{ MODKEY,                       XK_KP_Left,		   spawn,          SHCMD("playerctl --player spotify prev") },
-	{ 0,                            XF86XK_TouchpadToggle,  spawn,          SHCMD("playerctl --player spotify prev") },
+	{ 0,                            XF86XK_TouchpadToggle,  spawn,     SHCMD("playerctl --player spotify prev") },
 	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,   SHCMD("playerctl --player spotify volume 0.01+") },
 	{ 0,                            XF86XK_AudioLowerVolume,  spawn,   SHCMD("playerctl --player spotify volume 0.01-") },
 
@@ -138,7 +139,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    toggleAttachBelow,           {0} },
-	{ MODKEY,                       XK_w,      killclient,     {0} },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} }, // monocle
 	{ MODKEY|ControlMask,           XK_d,      setlayout,      {.v = &layouts[2]} }, // dwindle
@@ -151,8 +152,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY|ShiftMask,				XK_q,      quit,           {0} }, 
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
+	{ MODKEY|ControlMask|ShiftMask,	XK_q,      quit,           {0} }, 
+	{ MODKEY|ShiftMask,				XK_q,      quit,           {1} }, 
 
 
     /*                              Multi Monitor                               */
