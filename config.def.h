@@ -40,7 +40,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "discord",  NULL,       NULL,       1 << 3,            0,           -1 },
-	{ "Chromium", NULL,       NULL,       1 << 0,            0,           -1 },
+	/*{ "Chromium", NULL,       NULL,       1 << 0,            0,           -1 },*/
 };
 
 /* layout(s) */
@@ -86,7 +86,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_bg, "-sf", col_gray4, NULL };
 static const char *roficmd[] = { "rofi", "-show", "drun" , NULL };
-static const char *termcmd[]  = { "wezterm", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -102,15 +102,17 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("flameshot gui") },
 	{ MODKEY,                       XK_e,      spawn,          SHCMD("thunar") },
 	{ MODKEY,                       XK_v,      spawn,          SHCMD("clipmenu") },
+	{ MODKEY,                       XK_slash,  spawn,          SHCMD("rofi -modi emoji -show emoji") },
 
 
     /*                                  Media                                   */
 	{ 0,                            XF86XK_AudioPlay,  spawn,          SHCMD("playerctl --player spotify play-pause") },
 	{ 0,                            XF86XK_AudioNext,  spawn,          SHCMD("playerctl --player spotify next") },
-	{ 0,                            XF86XK_AudioPrev,  spawn,          SHCMD("playerctl --player spotify previous") },
+	{ 0,                            XF86XK_AudioPrev,  spawn,          SHCMD("playerctl --player spotify prev") },
 	{ MODKEY,                       XK_KP_Right,	   spawn,          SHCMD("playerctl --player spotify next") },
 	{ MODKEY,                       XK_KP_Left,		   spawn,          SHCMD("playerctl --player spotify prev") },
-	{ 0,                            XF86XK_TouchpadToggle,  spawn,     SHCMD("playerctl --player spotify prev") },
+	{ MODKEY,                       XK_bracketright,   spawn,          SHCMD("playerctl --player spotify next") },
+	{ MODKEY,                       XK_bracketleft,	   spawn,          SHCMD("playerctl --player spotify prev") },
 	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,   SHCMD("playerctl --player spotify volume 0.01+") },
 	{ 0,                            XF86XK_AudioLowerVolume,  spawn,   SHCMD("playerctl --player spotify volume 0.01-") },
 
